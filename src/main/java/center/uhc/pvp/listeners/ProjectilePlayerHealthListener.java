@@ -1,14 +1,13 @@
 package center.uhc.pvp.listeners;
 
-import center.uhc.core.util.Message;
-import center.uhc.core.util.PlayerUtil;
+import center.uhc.core.commons.Message;
+import center.uhc.core.commons.PlayerUtil;
 import center.uhc.pvp.PvPCore;
 import center.uhc.pvp.utils.PvPUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -32,15 +31,19 @@ public class ProjectilePlayerHealthListener implements Listener {
             if (arrow.getShooter() instanceof Player) {
                 Player damager = (Player) arrow.getShooter();
 
-                if (plugin.isProjectilePlayerHealth()) {
-                    double damagedPercent = PvPUtils.getPercentHealth(damaged);
-                    damager.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "§6" + damaged.getName() + " §eis now on " + PvPUtils.playerPercentWithColours(damagedPercent)));
-                }
-
                 if (plugin.isAnnounceLongshot()) {
                     double distance = PlayerUtil.getDistanceFromPlayer(damager, damaged);
+                    double distanceRounded = Math.round(distance * 100.0) / 100.0;
                     if (distance >= plugin.getLongShotDistance())
-                        Message.broadcast(Message.formatSystem(ChatColor.YELLOW, "Longshot", "§6" + damager.getName() + " §eshot §6" + damaged.getName() + " §efrom §6" + distance + " blocks §eaway!"));
+                        Message.broadcast(Message.formatSystem(ChatColor.YELLOW, "Longshot", "§6" + damager.getName() + " §eshot §6" + damaged.getName() + " §efrom §6" + distanceRounded + " blocks §eaway!"));
+                }
+
+                if (plugin.isProjectilePlayerHealth()) {
+                    double damagedPercent = PvPUtils.getPercentHealth(damaged.getHealth()-event.getFinalDamage(), damaged.getMaxHealth());
+                    if (damagedPercent <= 0)
+                        return;
+                    damagedPercent = Math.round(damagedPercent * 100.0) / 100.0;
+                    damager.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "§6" + damaged.getName() + " §eis now on " + PvPUtils.playerPercentWithColours(damagedPercent)));
                 }
             }
         }
@@ -63,7 +66,8 @@ public class ProjectilePlayerHealthListener implements Listener {
                     return;
 
                 double damagedPercent = PvPUtils.getPercentHealth(damaged);
-                damager.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "" + damaged.getName() + " is now on " + PvPUtils.playerPercentWithColours(damagedPercent)));
+                damagedPercent = Math.round(damagedPercent * 100.0) / 100.0;
+                damager.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "§6" + damaged.getName() + " §eis now on " + PvPUtils.playerPercentWithColours(damagedPercent)));
                 plugin.getRodMessageCooldown().add(damager);
                 Bukkit.getServer().getScheduler().runTaskLater(plugin.getPlugin(), () -> plugin.getRodMessageCooldown().remove(damager), (60));
             }

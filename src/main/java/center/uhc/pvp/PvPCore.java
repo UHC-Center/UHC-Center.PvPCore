@@ -1,6 +1,6 @@
 package center.uhc.pvp;
 
-import center.uhc.core.util.Module;
+import center.uhc.core.Module;
 import center.uhc.pvp.listeners.ProjectilePlayerHealthListener;
 import lombok.Getter;
 import lombok.Setter;

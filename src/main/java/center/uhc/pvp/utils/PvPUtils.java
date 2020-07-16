@@ -9,6 +9,10 @@ public class PvPUtils {
         return (player.getHealth() / player.getMaxHealth())*100;
     }
 
+    public static double getPercentHealth(double damage, double max) {
+        return (damage / max)*100;
+    }
+
     public static String playerPercentWithColours(double percent) {
         if (percent >= 0 && percent < 20)
             return "" + ChatColor.DARK_RED + percent + "%";
