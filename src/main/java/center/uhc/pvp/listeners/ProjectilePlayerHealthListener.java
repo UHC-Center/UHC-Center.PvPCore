@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -46,22 +47,12 @@ public class ProjectilePlayerHealthListener implements Listener {
                     damager.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "§6" + damaged.getName() + " §eis now on " + PvPUtils.playerPercentWithColours(damagedPercent)));
                 }
             }
-        }
-    }
+        } else if (event.getEntity() instanceof Player && event.getDamager() instanceof FishHook) {
+            Player damaged = (Player) event.getEntity();
+            FishHook hook = (FishHook) event.getDamager();
+            if (hook.getShooter() instanceof Player) {
+                Player damager = (Player) hook.getShooter();
 
-    @EventHandler
-    public void onRod(PlayerFishEvent event) {
-        if (event.isCancelled())
-            return;
-
-        if (!plugin.isProjectilePlayerHealth())
-            return;
-
-        Player damager = event.getPlayer();
-        if (event.getCaught() instanceof Player) {
-            Player damaged = (Player) event.getCaught();
-
-            if (damager.getInventory().getItemInHand().getType() == Material.FISHING_ROD) {
                 if (plugin.getRodMessageCooldown().contains(damager))
                     return;
 
@@ -73,5 +64,4 @@ public class ProjectilePlayerHealthListener implements Listener {
             }
         }
     }
-
 }

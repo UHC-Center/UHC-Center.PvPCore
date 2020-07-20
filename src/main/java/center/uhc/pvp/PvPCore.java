@@ -1,6 +1,7 @@
 package center.uhc.pvp;
 
 import center.uhc.core.Module;
+import center.uhc.pvp.combat.CombatManager;
 import center.uhc.pvp.listeners.ProjectilePlayerHealthListener;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,5 +35,8 @@ public class PvPCore extends Module {
 
         //Registering listeners
         getPlugin().getServer().getPluginManager().registerEvents(new ProjectilePlayerHealthListener(), getPlugin());
+
+        //Register modules
+        CombatManager combatManager = new CombatManager(getPlugin());
     }
 }

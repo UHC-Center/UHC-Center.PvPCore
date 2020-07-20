@@ -20,9 +20,9 @@ public class PvPUtils {
             return "" + ChatColor.RED + percent + "%";
         else if (percent >= 30 && percent < 50)
             return "" + ChatColor.GOLD + percent + "%";
-        else if (percent >= 50 && percent < 80)
+        else if (percent >= 50 && percent < 70)
             return "" + ChatColor.YELLOW + percent + "%";
-        else if (percent >= 80 && percent < 90)
+        else if (percent >= 70 && percent < 90)
             return "" + ChatColor.GREEN + percent + "%";
         else if (percent >= 90)
             return "" + ChatColor.DARK_GREEN + percent + "%";
