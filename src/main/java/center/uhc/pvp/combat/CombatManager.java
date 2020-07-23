@@ -79,6 +79,7 @@ public class CombatManager extends Module {
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, "" + player.getName() + " fell to their death"));
             }
+            noDeathMessage.add(player.getName());
         } else if (cause == EntityDamageEvent.DamageCause.FIRE || cause == EntityDamageEvent.DamageCause.FIRE_TICK || cause == EntityDamageEvent.DamageCause.LAVA) {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
