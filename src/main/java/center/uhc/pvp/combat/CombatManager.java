@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class CombatManager extends Module {
 
     @Getter private HashMap<Player, Player> combatLastHit;
-    private ArrayList<Player> noDeathMessage;
+    private ArrayList<String> noDeathMessage;
 
     public CombatManager(JavaPlugin plugin) {
         super(plugin, "Combat Manager");
@@ -63,7 +63,7 @@ public class CombatManager extends Module {
     }
 
     //Death Events
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onEntityDeath(EntityDeathEvent event) {
         if (!(event.getEntity() instanceof Player))
             return;
@@ -86,6 +86,7 @@ public class CombatManager extends Module {
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, "" + player.getName() + " burnt to death"));
             }
+            noDeathMessage.add(player.getName());
         } else if (cause == EntityDamageEvent.DamageCause.DROWNING) {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
@@ -93,6 +94,7 @@ public class CombatManager extends Module {
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, "" + player.getName() + " drowned"));
             }
+            noDeathMessage.add(player.getName());
         } else if (cause == EntityDamageEvent.DamageCause.SUFFOCATION) {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
@@ -100,6 +102,7 @@ public class CombatManager extends Module {
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, "" + player.getName() + " suffocated"));
             }
+            noDeathMessage.add(player.getName());
         } else if (cause == EntityDamageEvent.DamageCause.FALLING_BLOCK) {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
@@ -107,13 +110,19 @@ public class CombatManager extends Module {
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, "" + player.getName() + " was crushed by a falling block"));
             }
+            noDeathMessage.add(player.getName());
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent event) {
         String msg = event.getDeathMessage();
         event.setDeathMessage("");
+
+        if (noDeathMessage.contains(event.getEntity().getName())) {
+            noDeathMessage.remove(event.getEntity().getName());
+            return;
+        }
 
         try {
             Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(event.getEntity(), event.getEntity().getLastDamageCause().getCause(), event.getEntity().getKiller(), msg));

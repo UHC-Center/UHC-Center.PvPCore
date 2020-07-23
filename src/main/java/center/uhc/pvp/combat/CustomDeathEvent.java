@@ -21,6 +21,7 @@ public class CustomDeathEvent extends Event {
         this.deathCause = (deathCause == null ? EntityDamageEvent.DamageCause.CUSTOM : deathCause);
         this.killer = killer;
         this.deathMessage = deathMessage;
+        Message.console("called");
     }
 
     @Override public HandlerList getHandlers() { return handlers; }

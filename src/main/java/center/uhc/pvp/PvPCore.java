@@ -2,6 +2,7 @@ package center.uhc.pvp;
 
 import center.uhc.core.Module;
 import center.uhc.pvp.combat.CombatManager;
+import center.uhc.pvp.freeze.FreezeManager;
 import center.uhc.pvp.listeners.ProjectilePlayerHealthListener;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,5 +39,6 @@ public class PvPCore extends Module {
 
         //Register modules
         CombatManager combatManager = new CombatManager(getPlugin());
+        FreezeManager freezeManager = new FreezeManager(getPlugin());
     }
 }
