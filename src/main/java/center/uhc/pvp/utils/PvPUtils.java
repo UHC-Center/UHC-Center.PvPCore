@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class PvPUtils {
 
     public static double getPercentHealth(Player player) {
-        return (player.getHealth() / player.getMaxHealth())*100;
+        return (player.getHealth() / 20)*100;
     }
 
     public static double getPercentHealth(double damage, double max) {

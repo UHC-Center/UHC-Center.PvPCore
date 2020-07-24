@@ -30,6 +30,7 @@ public class CombatManager extends Module {
         registerSelf();
         combatLastHit = new HashMap<>();
         noDeathMessage = new ArrayList<>();
+        registerCommand(new HealthCommand());
     }
 
     //Damage Events
