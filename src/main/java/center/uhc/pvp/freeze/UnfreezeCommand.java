@@ -3,15 +3,14 @@ package center.uhc.pvp.freeze;
 import center.uhc.core.commands.ICommand;
 import center.uhc.core.commons.Message;
 import center.uhc.core.commons.PlayerUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class FreezeCommand implements ICommand {
+public class UnfreezeCommand implements ICommand {
 
     @Override
     public String command() {
-        return "freeze";
+        return "unfreeze";
     }
 
     @Override
@@ -28,7 +27,7 @@ public class FreezeCommand implements ICommand {
     public void run(Player player, String[] args) {
         FreezeManager f = FreezeManager.getInstance();
         if (args == null || args.length < 1) {
-            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage: /freeze <player>"));
+            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Correct Usage: /unfreeze <player>"));
             return;
         }
 
@@ -39,15 +38,16 @@ public class FreezeCommand implements ICommand {
         }
 
         if (target == player) {
-            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "You cannot freeze yourself, silly!"));
+            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "You cannot unfreeze yourself, silly!"));
             return;
         }
 
         if (f.isFrozen(target)) {
-            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", target.getName() + " is already frozen!"));
+            f.unFreeze(target, player);
+            player.sendMessage(Message.formatSystem(ChatColor.GREEN, "Freeze", "You unfroze " + target.getName() + "."));
         } else {
-            f.freeze(target, FreezeManager.FreezeReason.STAFF, player);
-            player.sendMessage(Message.formatSystem(ChatColor.GREEN, "Freeze", "You froze " + target.getName() + "."));
+            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", target.getName() + " is not frozen!"));
         }
     }
+
 }

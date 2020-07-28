@@ -28,7 +28,6 @@ public class HealthCommand implements ICommand {
     public void run(Player player, String[] args) {
         if (args == null || args.length < 1) {
             player.sendMessage(Message.formatSystem(ChatColor.YELLOW, "PvP", "§eYou are on " + PvPUtils.playerPercentWithColours(PvPUtils.getPercentHealth(player))));
-            player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", "Optional Usage: /health <player>"));
             return;
         }
 

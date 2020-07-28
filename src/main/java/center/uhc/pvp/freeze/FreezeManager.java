@@ -48,6 +48,7 @@ public class FreezeManager extends Module {
         registerSelf();
 
         registerCommand(new FreezeCommand());
+        registerCommand(new UnfreezeCommand());
         registerCommand(new PanicCommand());
     }
 

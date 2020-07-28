@@ -129,7 +129,7 @@ public class CombatManager extends Module {
         try {
             Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(event.getEntity(), event.getEntity().getLastDamageCause().getCause(), event.getEntity().getKiller(), msg));
         } catch (Exception e) {
-            Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(event.getEntity(), EntityDamageEvent.DamageCause.CUSTOM, null, "" + event.getEntity() + " died"));
+            Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(event.getEntity(), EntityDamageEvent.DamageCause.CUSTOM, null, "" + event.getEntity().getName() + " died"));
         }
     }
 }
