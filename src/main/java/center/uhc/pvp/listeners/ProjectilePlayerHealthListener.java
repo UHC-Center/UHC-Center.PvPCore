@@ -1,12 +1,11 @@
 package center.uhc.pvp.listeners;
 
 import center.uhc.core.commons.Message;
-import center.uhc.core.commons.PlayerUtil;
+import center.uhc.core.commons.PlayerUtils;
 import center.uhc.pvp.PvPCore;
 import center.uhc.pvp.utils.PvPUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
@@ -15,7 +14,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerFishEvent;
 
 public class ProjectilePlayerHealthListener implements Listener {
 
@@ -33,7 +31,7 @@ public class ProjectilePlayerHealthListener implements Listener {
                 Player damager = (Player) arrow.getShooter();
 
                 if (plugin.isAnnounceLongshot()) {
-                    double distance = PlayerUtil.getDistanceFromPlayer(damager, damaged);
+                    double distance = PlayerUtils.getDistanceFromPlayer(damager, damaged);
                     double distanceRounded = Math.round(distance * 100.0) / 100.0;
                     if (distance >= plugin.getLongShotDistance())
                         Message.broadcast(Message.formatSystem(ChatColor.YELLOW, "Longshot", "§6" + damager.getName() + " §eshot §6" + damaged.getName() + " §efrom §6" + distanceRounded + " blocks §eaway!"));

@@ -2,8 +2,7 @@ package center.uhc.pvp.freeze;
 
 import center.uhc.core.commands.ICommand;
 import center.uhc.core.commons.Message;
-import center.uhc.core.commons.PlayerUtil;
-import org.bukkit.Bukkit;
+import center.uhc.core.commons.PlayerUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -32,7 +31,7 @@ public class FreezeCommand implements ICommand {
             return;
         }
 
-        Player target = PlayerUtil.search(args[0]);
+        Player target = PlayerUtils.search(args[0]);
         if (target == null) {
             player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", args[0] + " is not online!"));
             return;

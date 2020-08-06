@@ -2,7 +2,7 @@ package center.uhc.pvp.combat;
 
 import center.uhc.core.commands.ICommand;
 import center.uhc.core.commons.Message;
-import center.uhc.core.commons.PlayerUtil;
+import center.uhc.core.commons.PlayerUtils;
 import center.uhc.pvp.utils.PvPUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class HealthCommand implements ICommand {
             return;
         }
 
-        Player target = PlayerUtil.search(args[0]);
+        Player target = PlayerUtils.search(args[0]);
         if (target == null) {
             player.sendMessage(Message.formatSystem(ChatColor.RED, "Error", args[0] + " is not online!"));
             return;
