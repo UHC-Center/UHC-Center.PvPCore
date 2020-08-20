@@ -10,14 +10,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PvPCore extends Module {
 
     //All configuration options
     @Getter @Setter private boolean announceLongshot = false;
     @Getter @Setter private double longShotDistance = 20;
-    @Getter @Setter private boolean customDeathMessages = false;
     @Getter @Setter private boolean projectilePlayerHealth = true;
+    @Getter @Setter private boolean firstBlood = false;
 
     //Instance
     @Getter private static PvPCore instance;
@@ -40,5 +41,12 @@ public class PvPCore extends Module {
         //Register modules
         CombatManager combatManager = new CombatManager(getPlugin());
         FreezeManager freezeManager = new FreezeManager(getPlugin());
+    }
+
+    public void reset() {
+        CombatManager.getInstance().setCombatLastHit(new HashMap<>());
+        CombatManager.getInstance().setCombatAssists(new HashMap<>());
+        CombatManager.getInstance().setNoDeathMessage(new ArrayList<>());
+        CombatManager.getInstance().setFirstBloodAnnounced(false);
     }
 }

@@ -23,6 +23,11 @@ public class PanicCommand implements ICommand {
     }
 
     @Override
+    public ICommand[] childCommands() {
+        return new ICommand[0];
+    }
+
+    @Override
     public void run(Player player, String[] args) {
         FreezeManager f = FreezeManager.getInstance();
 
