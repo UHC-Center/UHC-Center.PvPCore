@@ -99,7 +99,7 @@ public class CombatManager extends Module {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
                 firstBlood(killer);
-                Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, killer, getAssists(player), "" + player.getName() + " was burnt to a crisp whilst fighting %s"));
+                Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, killer, getAssists(player), "" + player.getName() + " was burnt to a crisp trying to escape %s"));
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, getAssists(player), "" + player.getName() + " burnt to death"));
             }
@@ -126,7 +126,7 @@ public class CombatManager extends Module {
             if (getCombatLastHit().containsKey(player)) {
                 Player killer = getCombatLastHit().get(player);
                 firstBlood(killer);
-                Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, killer, getAssists(player), "" + player.getName() + " was crushed whilst fighting " + killer.getName()));
+                Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, killer, getAssists(player), "" + player.getName() + " was crushed whilst fighting %s"));
             } else {
                 Bukkit.getServer().getPluginManager().callEvent(new CustomDeathEvent(player, cause, null, getAssists(player), "" + player.getName() + " was crushed by a falling block"));
             }
