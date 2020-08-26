@@ -4,6 +4,7 @@ import center.uhc.core.Module;
 import center.uhc.pvp.combat.CombatManager;
 import center.uhc.pvp.freeze.FreezeManager;
 import center.uhc.pvp.listeners.ProjectilePlayerHealthListener;
+import center.uhc.pvp.listeners.TabHealthListener;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -37,6 +38,7 @@ public class PvPCore extends Module {
 
         //Registering listeners
         getPlugin().getServer().getPluginManager().registerEvents(new ProjectilePlayerHealthListener(), getPlugin());
+        getPlugin().getServer().getPluginManager().registerEvents(new TabHealthListener(), getPlugin());
 
         //Register modules
         CombatManager combatManager = new CombatManager(getPlugin());
